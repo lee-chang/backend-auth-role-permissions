@@ -3,25 +3,41 @@ import { v4 as uuidV4, v1 as uuidV1 } from 'uuid'
 import ObjectId from 'bson-objectid'
 
 
-
-export interface UuidGenerator {
+interface UuidGeneratorPort {
   generate: () => string
 }
 
-export const uuidV4Generator: UuidGenerator = {
-  generate: () => uuidV4(),
+
+export class UuidGenerator implements UuidGeneratorPort{
+  private uuidGenerator: UuidGeneratorPort
+  constructor() {
+    this.uuidGenerator = new UuidGeneratorUtil().uuidV4Generator
+  }
+  generate(): string {
+    return this.uuidGenerator.generate()
+  }
+
 }
 
-export const uuidV1Generator: UuidGenerator = {
-  generate: () => uuidV1(),
-}
 
-export const uuidDBGenerator: UuidGenerator = {
-  generate: () => bsonObjectIdDB(),
-}
 
-function bsonObjectIdDB() {
-  const objectId = new ObjectId()
-  const objectIdString = objectId.toString()
-  return objectIdString
+
+export class UuidGeneratorUtil {
+  uuidV4Generator: UuidGeneratorPort = {
+    generate: () => uuidV4(),
+  }
+
+  uuidV1Generator: UuidGeneratorPort = {
+    generate: () => uuidV1(),
+  }
+
+  objectIdGenerator: UuidGeneratorPort = {
+    generate: () => {
+      const objectId = new ObjectId()
+      const objectIdString = objectId.toString()
+      return objectIdString
+    }
+  }
+
+
 }

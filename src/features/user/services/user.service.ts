@@ -1,6 +1,7 @@
 import { UserRepository } from '../repositories/user.repository'
 import { IUser } from '../interfaces/user.interface'
 import { notUndefinedOrNull } from '@/core/service/exceptions/data-not-received.exception'
+import { AuthUtil } from '@/features/auth/utils/auth.util'
 
 // import { addAbortSignal } from 'nodemailer/lib/xoauth2'
 
@@ -20,9 +21,7 @@ export class UserService {
   }
 
   static async updateUserById(id: string, user: IUser): Promise<IUser> {
-
     if (user.password) {
-      
     }
 
     const userUpdated = await this.userRepository.updateUserById(id, user)
@@ -40,6 +39,17 @@ export class UserService {
     return notUndefinedOrNull(userCreated)
   }
 
+  static async updateUserPassword(
+    id: string,
+    password: string
+  ): Promise<IUser> {
+    const passwordHashed = await AuthUtil.hashPassword(password)
+
+    const userUpdated = await this.userRepository.updateUserById(id, {
+      password: passwordHashed,
+    })
+    return notUndefinedOrNull(userUpdated)
+  }
 
   // ** UTILS
 

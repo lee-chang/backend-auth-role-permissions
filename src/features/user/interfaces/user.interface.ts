@@ -1,4 +1,5 @@
 import { IAuth } from '@/features/auth/interfaces/auth.interface'
+import { IAddress } from '@/features/shared/interfaces/address.interface'
 import { IPhone } from '@/features/shared/interfaces/phone.interface'
 
 export interface IUser extends IAuth {
@@ -8,7 +9,8 @@ export interface IUser extends IAuth {
   authority: [string]
   verified: boolean
   login_code: string
-  phone: IPhone
+  phone: [IPhone]
+  address: [IAddress]
   createdAt: Date
   updatedAt: Date
 }

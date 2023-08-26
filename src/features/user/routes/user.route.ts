@@ -20,11 +20,16 @@ router.patch(
   validatorShema(UserSchema.Update),
   UserControlller.updateUser
 )
+router.patch(
+  '/:id/password',
+  validatorShema(UserSchema.UpdatePassword),
+  UserControlller.updateUserPassword
+)
 
 // ** RELATIONSHIPS
 router.patch(
   '/:id/roles',
-  // authRequired,
+  authRequired,
   validatorShema(UserSchema.UpdateAuthority),
   UserRoleController.updateUserRoles
 )

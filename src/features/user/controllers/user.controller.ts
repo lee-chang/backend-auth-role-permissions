@@ -45,4 +45,15 @@ export class UserControlller {
       next(err)
     }
   }
+
+  static async updateUserPassword(req: Request, res: Response,next:NextFunction) {
+    const { id } = req.params
+    const { password } = req.body
+    try {
+      const userUpdated = await UserService.updateUserPassword(id, password)
+      return res.status(HttpStatus.OK).send(userUpdated)
+    } catch (err) {
+      next(err)
+    }
+  }
 }
