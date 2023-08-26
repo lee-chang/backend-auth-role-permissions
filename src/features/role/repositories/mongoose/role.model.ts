@@ -1,12 +1,20 @@
-import { Schema, model } from 'mongoose'
+import { Schema, model, Types } from 'mongoose'
 import { IRole } from '../../interfaces/role.interface'
-import { UuidGenerator } from '@/core/utils/UuidGenerator.util' 
+import { UuidGenerator } from '@/core/utils/UuidGenerator.util'
 
-const roleSchema = new Schema<IRole>(
+const uuid = new UuidGenerator().generate()
+
+const roleSchema = new Schema<IRole & {_id:string}>(
   {
     _id: {
+      type:String,
+      default: uuid
+    },
+    id: {
       type: String,
-      default: new UuidGenerator().generate(),
+      default: uuid,
+      unique: true,
+      key: true,
     },
     name: {
       type: String,
@@ -25,9 +33,15 @@ const roleSchema = new Schema<IRole>(
     createdAt: {
       type: Date,
       default: Date.now,
-    }
+    },
   },
   {
+    id: true,
+    toJSON: {
+      transform(doc, ret) {
+        delete ret._id
+      }
+    },
     timestamps: true,
     versionKey: false,
   }

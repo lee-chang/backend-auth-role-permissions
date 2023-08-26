@@ -2,11 +2,19 @@ import { model, Schema } from 'mongoose'
 import { Task } from '../../interfaces/task.interface'
 import { UuidGenerator } from '@/core/utils/UuidGenerator.util'
 
-const taskSchema: Schema = new Schema<Task>(
+const uuid = new UuidGenerator().generate()
+
+const taskSchema: Schema = new Schema<Task & {_id:string}>(
   {
     _id: {
+      type:String,
+      default: uuid,
+    },
+    id: {
       type: String,
-      default: new UuidGenerator().generate(),
+      default: uuid,
+      unique: true,
+      key: true      
     },
     title: {
       type: String,
@@ -29,6 +37,12 @@ const taskSchema: Schema = new Schema<Task>(
     },
   },
   {
+    id: true,
+    toJSON: {
+      transform(doc, ret) {
+        delete ret._id
+      },
+    },
     timestamps: true,
     versionKey: false,
   }

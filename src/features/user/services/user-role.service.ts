@@ -44,7 +44,7 @@ export class UserRoleService {
 
     await Promise.all(
       someNewRoles.map(async (idRole) => {
-        await UtilsService.addUserInRol(user._id, idRole)
+        await UtilsService.addUserInRol(user.id, idRole)
         newRoleList.push(idRole)
       })
     )
@@ -53,7 +53,7 @@ export class UserRoleService {
 
     await Promise.all(
       someRemovedRoles.map(async (idRole) => {
-        await UtilsService.removeUserInRol(user._id, idRole)
+        await UtilsService.removeUserInRol(user.id, idRole)
         const index = newRoleList.indexOf(idRole)
         if (index !== -1) {
           newRoleList.splice(index, 1)

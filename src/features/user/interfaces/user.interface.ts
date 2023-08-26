@@ -3,7 +3,7 @@ import { IAddress } from '@/features/shared/interfaces/address.interface'
 import { IPhone } from '@/features/shared/interfaces/phone.interface'
 
 export interface IUser extends IAuth {
-  _id: string
+  id: string
   userName: string
   fullName: string
   authority: [string]

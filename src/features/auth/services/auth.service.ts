@@ -42,7 +42,7 @@ export class AuthService {
 
     const data: resAuth = {
       user: {
-        id: newUser.user._id.toString(),
+        id: newUser.user.id.toString(),
         userName: newUser.user.userName,
         email: newUser.user.email,
         authority: newUser.user.authority,
@@ -62,7 +62,7 @@ export class AuthService {
 
     const data: resAuth = {
       user: {
-        id: userLogged._id,
+        id: userLogged.id,
         userName: userLogged.userName,
         email: userLogged.email,
         authority: userLogged.authority,
@@ -81,7 +81,7 @@ export class AuthService {
     if (!userFound) throw new ErrorExt('USER_NOT_FOUND', HttpStatus.BAD_REQUEST)
 
     const data: userData = {
-      id: userFound._id.toString(),
+      id: userFound.id.toString(),
       userName: userFound.userName,
       email: userFound.email,
       authority: userFound.authority,

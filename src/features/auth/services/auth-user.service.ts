@@ -22,7 +22,7 @@ export class AuthUserService {
     if (!newUser) throw new ErrorExt('USER_NOT_CREATED')
 
     const payload: Payload = {
-      id: newUser._id,
+      id: newUser.id,
       authority: newUser.authority,
     }
     const token = await AuthUtil.generateToken(payload)
@@ -43,7 +43,7 @@ export class AuthUserService {
     if (!validPassword) throw new ErrorExt('CREDENTIAL_INVALID', HttpStatus.BAD_REQUEST)
 
     const payload: Payload = {
-      id: userFount._id,
+      id: userFount.id,
       authority: userFount.authority,
       rememberMe: isRememberMe,
     }

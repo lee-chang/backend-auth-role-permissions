@@ -9,7 +9,7 @@ const roleSchema = z.object({
     z.string().refine((value) => keysPermissions.includes(value), {
       message: 'PERMISSION NOT VALID',
     })
-  ),
+  ).optional(),
 })
 
 export const RoleSchema = {

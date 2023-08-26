@@ -1,7 +1,7 @@
 import { KeyPermissions } from "./permissions";
 
 export interface IRole {
-    _id: string;
+    id: string;
     name: string;
     permissions: [KeyPermissions];
     users: string[];

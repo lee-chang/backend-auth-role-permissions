@@ -31,7 +31,7 @@ router.delete(
 router.post(
   '/',
   authRequired,
-  validatePermission(Permission.CREATE_ROLE),
+  // validatePermission(Permission.CREATE_ROLE),
   validatorShema(RoleSchema.Create),
   RoleController.createRole
 )
@@ -49,7 +49,7 @@ router.patch(
 router.patch(
   '/:id/permissions',
   authRequired,
-  validatePermission(Permission.UPDATE_ROLE),
+  // validatePermission(Permission.UPDATE_ROLE),
   validatorShema(RoleSchema.UpdatePermissions),
   RoleController.updatePermissions
 )

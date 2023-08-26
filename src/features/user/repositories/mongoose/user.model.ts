@@ -5,11 +5,19 @@ import { model, Schema } from 'mongoose'
 import { phoneSchema } from '@/features/shared/repositories/mongoose/phone.model'
 import { addressSchema } from '@/features/shared/repositories/mongoose/address.model'
 
-const userSchema: Schema = new Schema<IUser>(
+const uuid = new UuidGenerator().generate()
+
+const userSchema: Schema = new Schema<IUser & {_id:string}>(
   {
     _id: {
+      type:String,
+      default: uuid,
+    },
+    id: {
       type: String,
-      default: new UuidGenerator().generate(),
+      default: uuid,
+      unique: true,
+      key: true      
     },
     userName: {
       type: String,
@@ -56,6 +64,12 @@ const userSchema: Schema = new Schema<IUser>(
     },
   },
   {
+    id: true,
+    toJSON: {
+      transform(doc, ret) {
+        delete ret._id
+      },
+    },
     timestamps: true,
     versionKey: false,
   }
