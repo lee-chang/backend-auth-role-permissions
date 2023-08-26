@@ -17,4 +17,12 @@ export class AuthRepositoryMongoDB implements AuthRepositoryPort {
     return user
   }
 
+  async findUserById(id: string) {
+    const user = await UserModel.findById(id)
+    if (!user) {
+      return null
+    }
+    return user
+  }
+
 }

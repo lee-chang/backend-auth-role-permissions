@@ -75,9 +75,9 @@ export class AuthService {
 
   static async logoutService(user: IAuth) {}
 
-  static async meService(auth: IAuth) {
+  static async meService(user: Payload) {
 
-    const userFound = await authRepository.findUserByEmail(auth.email)
+    const userFound = await authRepository.findUserById(user.id)
     if (!userFound) throw new ErrorExt('USER_NOT_FOUND', HttpStatus.BAD_REQUEST)
 
     const data: userData = {

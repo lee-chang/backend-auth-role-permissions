@@ -17,4 +17,8 @@ export class AuthRepository implements AuthRepositoryPort {
     return await this.userRepository.findUserByEmail(email)
   }
 
+  async findUserById(id: string) {
+    return await this.userRepository.findUserById(id)
+  }
+
 }

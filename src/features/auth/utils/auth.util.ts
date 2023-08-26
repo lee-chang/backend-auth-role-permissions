@@ -9,7 +9,7 @@ export class AuthUtil {
     return new Promise<string | undefined>((resolve, reject) => {
 
       // ** Checkboxes rememberMe
-      const expiresIn = payload.rememberMe ? "30d" : "1d";
+      const expiresIn = payload.rememberMe ? "30d" : "6d";
   
       jwt.sign(
         { id: payload.id, authority: payload.authority },

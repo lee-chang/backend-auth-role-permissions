@@ -5,6 +5,7 @@ import { ENV_CONFIG } from '@/config/env.config'
 import { HttpStatus } from '@/core/interfaces/httpStatus.interface'
 
 import { AuthService } from '../services/auth.service'
+import { Payload } from '../interfaces/jwt.payload.interface'
 
 export class AuthController {
   static async register(req: Request, res: Response, next: NextFunction) {
@@ -42,8 +43,7 @@ export class AuthController {
   }
 
   static async me(req: Request, res: Response, next: NextFunction) {
-    const user: IAuth = req.user
-
+    const user: Payload = req.user
     try {
       const data = await AuthService.meService(user)
       res.status(HttpStatus.OK).json(data)
