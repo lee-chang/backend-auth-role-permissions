@@ -1,0 +1,44 @@
+export interface PermissionObject {
+  [key: string]: string
+}
+
+enum Permission {
+
+  // ** ALL PERMISSIONS (FOR SUPER ADMIN)
+  ALL_PERMISSIONS = 'ALL PERMISSIONS',
+
+  // ** PRODUCT
+  CREATE_PRODUCT = 'CREATE PRODUCT',
+  READ_PRODUCT = 'READ PRODUCT',
+  UPDATE_PRODUCT = 'UPDATE PRODUCT',
+  DELETE_PRODUCT = 'DELETE PRODUCT',
+
+  // ** USER
+  CREATE_USER = 'CREATE USER',
+  READ_USER = 'READ USER',
+  UPDATE_USER = 'UPDATE USER',
+  DELETE_USER = 'DELETE USER',
+  EDIT_YOUR_USER = 'EDIT YOUR USER',
+
+  // ** TASK
+  CREATE_TASK = 'CREATE TASK',
+  READ_TASK = 'READ TASK',
+  UPDATE_TASK = 'UPDATE TASK',
+  DELETE_TASK = 'DELETE TASK',
+  
+  // ** ROLE
+  CREATE_ROLE = 'CREATE ROLE',
+  READ_ROLE = 'READ ROLE',
+  UPDATE_ROLE = 'UPDATE ROLE',
+  DELETE_ROLE = 'DELETE ROLE',
+  ASSIGN_ROLE = 'ASSIGN ROLE', // ** RELATIONSHIPS ROLE-USER
+
+  // ** PERMISSION
+  READ_PERMISSION = 'READ PERMISSION',
+
+}
+
+export default Permission
+
+export const keysPermissions = Object.keys(Permission)
+export type KeyPermissions = keyof typeof Permission
