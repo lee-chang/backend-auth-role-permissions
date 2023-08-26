@@ -24,5 +24,5 @@ const userSchema = z.object({
 export const UserSchema = {
   Create: userSchema,
   UpdateAuthority: authoritySchema,
-  Update: userSchema.omit({ password: true }),
+  Update: userSchema.omit({ password: true, authority: true }).partial(),
 }

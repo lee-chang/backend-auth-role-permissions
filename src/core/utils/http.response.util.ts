@@ -11,7 +11,7 @@ export class AppError extends Error {
 }
 
 export class ErrorExt extends AppError {
-  constructor(message: string, status: HttpStatus) {
-    super(message, status);
+  constructor(message: string, status?: HttpStatus) {
+    super(message, status ?? HttpStatus.INTERNAL_SERVER_ERROR);
   }
 }

@@ -78,7 +78,7 @@ export class AuthService {
   static async meService(auth: IAuth) {
 
     const userFound = await authRepository.findUserByEmail(auth.email)
-    if (!userFound) throw new Error('USER_NOT_FOUND')
+    if (!userFound) throw new ErrorExt('USER_NOT_FOUND', HttpStatus.BAD_REQUEST)
 
     const data: userData = {
       id: userFound._id.toString(),

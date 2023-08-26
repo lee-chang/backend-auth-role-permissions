@@ -1,4 +1,3 @@
-import { KeyPermissions } from '@/features/role/interfaces/permissions'
 import { IUser } from '../interfaces/user.interface'
 import { UserRepository } from '../repositories/user.repository'
 import { RoleRepository } from '@/features/role/repositories/role.repository'

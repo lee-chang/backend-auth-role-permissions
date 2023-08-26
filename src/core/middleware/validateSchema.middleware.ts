@@ -12,6 +12,8 @@ export const validatorShema = (schema: Schema) => {
         .json({ error: JSON.parse(result.error.message) });
     }
 
+    req.body = result.data;
+
     next();
   };
 };

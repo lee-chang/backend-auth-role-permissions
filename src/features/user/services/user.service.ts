@@ -20,7 +20,13 @@ export class UserService {
   }
 
   static async updateUserById(id: string, user: IUser): Promise<IUser> {
+
+    if (user.password) {
+      
+    }
+
     const userUpdated = await this.userRepository.updateUserById(id, user)
+
     return notUndefinedOrNull(userUpdated)
   }
 
