@@ -36,7 +36,7 @@ export class AuthController {
 
   static async logout(req: Request, res: Response, next: NextFunction) {
     try {
-      res.status(HttpStatus.OK).clearCookie(ENV_CONFIG.NAME_STORAGE_TOKEN_JWT)
+      return res.status(HttpStatus.OK).clearCookie(ENV_CONFIG.NAME_STORAGE_TOKEN_JWT)
     } catch (err) {
       next(err)
     }
