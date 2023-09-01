@@ -2,7 +2,6 @@ import { UserRepositoryPort } from './user-repository.model'
 import { UserRepositoryMongoDB } from './mongoose/user-mongo.repository'
 
 export class UserRepository implements UserRepositoryPort {
-
   private userRepository: UserRepositoryPort
 
   constructor() {
@@ -13,8 +12,8 @@ export class UserRepository implements UserRepositoryPort {
     return await this.userRepository.createUser(user)
   }
 
-  async findAllUsers() {
-    return await this.userRepository.findAllUsers()
+  async findAllUsers(page: number, limit: number) {
+    return await this.userRepository.findAllUsers(page, limit)
   }
 
   async findUserById(id: string) {

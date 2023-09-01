@@ -10,8 +10,8 @@ const roleRepository = new RoleRepository()
 export class RoleSevice {
   // ** CRUD
 
-  static async findAllRoles() {
-    const roles = await roleRepository.findAllRoles()
+  static async findAllRoles(page:number,limit:number) {
+    const roles = await roleRepository.findAllRoles(page,limit)
     return notUndefinedOrNull(roles)
   }
 

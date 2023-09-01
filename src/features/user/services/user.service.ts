@@ -2,6 +2,7 @@ import { UserRepository } from '../repositories/user.repository'
 import { IUser } from '../interfaces/user.interface'
 import { notUndefinedOrNull } from '@/core/service/exceptions/data-not-received.exception'
 import { AuthUtil } from '@/features/auth/utils/auth.util'
+import { PaginateData } from '@/core/interfaces/resPaginate.interface'
 
 // import { addAbortSignal } from 'nodemailer/lib/xoauth2'
 
@@ -15,8 +16,8 @@ export class UserService {
     return notUndefinedOrNull(user)
   }
 
-  static async getAllUsers(): Promise<IUser[]> {
-    const users = await this.userRepository.findAllUsers()
+  static async getAllUsers(page:number,limit:number): Promise<PaginateData<IUser>> {
+    const users = await this.userRepository.findAllUsers(page,limit)
     return users
   }
 

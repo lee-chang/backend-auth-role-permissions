@@ -1,6 +1,7 @@
 import { RoleRepositoryPort } from './role-reposiory.model'
 import { RoleRepositoryMongoDB } from './mongoose/role-mongo.repository'
 import { IRole } from '../interfaces/role.interface'
+import { PaginateData } from '@/core/interfaces/resPaginate.interface'
 
 export class RoleRepository implements RoleRepositoryPort {
   private roleRepository: RoleRepositoryPort
@@ -9,8 +10,11 @@ export class RoleRepository implements RoleRepositoryPort {
     this.roleRepository = new RoleRepositoryMongoDB()
   }
 
-  async findAllRoles(): Promise<IRole[]> {
-    return await this.roleRepository.findAllRoles()
+  async findAllRoles(
+    page: number,
+    limit: number
+  ): Promise<PaginateData<IRole>> {
+    return await this.roleRepository.findAllRoles(page, limit)
   }
 
   async findRoleById(id: string): Promise<IRole | null> {

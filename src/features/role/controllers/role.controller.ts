@@ -6,8 +6,11 @@ import { KeyPermissions } from '../interfaces/permissions'
 
 export class RoleController {
   static async getRoles(req: Request, res: Response, next: NextFunction) {
+    let page = Number(req.query.page) || 1
+    let limit = Number(req.query.limit) || Infinity
+
     try {
-      const roles = await RoleSevice.findAllRoles()
+      const roles = await RoleSevice.findAllRoles(page, limit)
       res.status(HttpStatus.OK).json(roles)
     } catch (err) {
       next(err)
@@ -62,7 +65,6 @@ export class RoleController {
     res: Response,
     next: NextFunction
   ) {
-
     const { id } = req.params
     const { permissions }: { permissions: [KeyPermissions] } = req.body
 

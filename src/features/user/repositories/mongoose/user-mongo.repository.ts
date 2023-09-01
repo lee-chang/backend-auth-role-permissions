@@ -1,3 +1,4 @@
+import { PaginateData } from '@/core/interfaces/resPaginate.interface'
 import { IUser } from '../../interfaces/user.interface'
 import { UserRepositoryPort } from '../user-repository.model'
 import UserModel from './user.model'
@@ -8,13 +9,37 @@ export class UserRepositoryMongoDB implements UserRepositoryPort {
     return userCreated
   }
 
-  async findAllUsers() {
+  async findAllUsers(page: number,
+    limit: number
+  ): Promise<PaginateData<IUser>>{
+    const totalUsers = await UserModel.countDocuments()
+
+    const totalPages = Math.ceil(totalUsers / limit)
+
+    const currentPage = page > totalPages ? totalPages : page || 1
+
     const users = await UserModel.find()
+      .limit(limit)
+      .skip((page - 1) * limit)
+      .exec()
+
     if (!users) {
-      return []
+      let response: PaginateData<IUser> = {
+        total: 0,
+        totalPages: 0,
+        currentPage: 0,
+        data: [],
+      }
+      return response
     }
 
-    return users
+    let response: PaginateData<IUser> = {
+      total: totalUsers,
+      totalPages,
+      currentPage,
+      data: users,
+    }
+    return response
   }
 
   async findUserById(id: string) {

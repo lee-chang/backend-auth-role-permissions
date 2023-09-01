@@ -1,17 +1,40 @@
 import { IRole } from '../../interfaces/role.interface'
-import { KeyPermissions } from '../../interfaces/permissions'
 import { RoleModel } from './role.model'
 import { RoleRepositoryPort } from '../role-reposiory.model'
+import { PaginateData } from '@/core/interfaces/resPaginate.interface'
 
 export class RoleRepositoryMongoDB implements RoleRepositoryPort {
-  async findAllRoles() {
+  async findAllRoles(page: number,
+    limit: number
+  ): Promise<PaginateData<IRole>>{
+    const totalRoles = await RoleModel.countDocuments()
+
+    const totalPages = Math.ceil(totalRoles / limit)
+
+    const currentPage = page > totalPages ? totalPages : page || 1
+
     const roles = await RoleModel.find()
+      .limit(limit)
+      .skip((page - 1) * limit)
+      .exec()
 
     if (!roles) {
-      return []
+      let response: PaginateData<IRole> = {
+        total: 0,
+        totalPages: 0,
+        currentPage: 0,
+        data: [],
+      }
+      return response
     }
 
-    return roles
+    let response: PaginateData<IRole> = {
+      total: totalRoles,
+      totalPages,
+      currentPage,
+      data: roles,
+    }
+    return response
   }
 
   async findRoleById(id: string) {

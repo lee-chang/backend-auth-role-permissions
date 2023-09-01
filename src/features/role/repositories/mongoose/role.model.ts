@@ -5,7 +5,7 @@ import { UuidGenerator } from '@/core/utils/UuidGenerator.util'
 const roleSchema = new Schema<IRole & {_id:string}>(
   {
     _id: {
-      type:String
+      type:String,
     },
     id: {
       type: String,

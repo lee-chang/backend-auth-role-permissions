@@ -3,10 +3,12 @@ import { HttpStatus } from '@/core/interfaces/httpStatus.interface'
 import { UserService } from '../services/user.service'
 
 export class UserControlller {
+  static async getUsers(req: Request, res: Response, next: NextFunction) {
+    let page = Number(req.query.page) || 1
+    let limit = Number(req.query.limit) || Infinity
 
-  static async getUsers(req: Request, res: Response,next:NextFunction) {
     try {
-      const users = await UserService.getAllUsers()
+      const users = await UserService.getAllUsers(page, limit)
       return res.status(HttpStatus.OK).send(users)
     } catch (err) {
       // console.log(err)
@@ -14,7 +16,7 @@ export class UserControlller {
     }
   }
 
-  static async getUser(req: Request, res: Response,next:NextFunction) {
+  static async getUser(req: Request, res: Response, next: NextFunction) {
     const { id } = req.params
 
     try {
@@ -25,7 +27,7 @@ export class UserControlller {
     }
   }
 
-  static async updateUser(req: Request, res: Response,next:NextFunction) {
+  static async updateUser(req: Request, res: Response, next: NextFunction) {
     const { id } = req.params
     const user = req.body
     try {
@@ -36,7 +38,7 @@ export class UserControlller {
     }
   }
 
-  static async deleteUser(req: Request, res: Response,next:NextFunction) {
+  static async deleteUser(req: Request, res: Response, next: NextFunction) {
     const { id } = req.params
     try {
       const userDeleted = await UserService.deleteUserById(id)
@@ -46,7 +48,11 @@ export class UserControlller {
     }
   }
 
-  static async updateUserPassword(req: Request, res: Response,next:NextFunction) {
+  static async updateUserPassword(
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) {
     const { id } = req.params
     const { password } = req.body
     try {
