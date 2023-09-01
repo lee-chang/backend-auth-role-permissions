@@ -5,17 +5,14 @@ import { model, Schema } from 'mongoose'
 import { phoneSchema } from '@/features/shared/repositories/mongoose/phone.model'
 import { addressSchema } from '@/features/shared/repositories/mongoose/address.model'
 
-const uuid = new UuidGenerator().generate()
 
 const userSchema: Schema = new Schema<IUser & {_id:string}>(
   {
     _id: {
       type:String,
-      default: uuid,
     },
     id: {
       type: String,
-      default: uuid,
       unique: true,
       key: true      
     },
@@ -74,6 +71,18 @@ const userSchema: Schema = new Schema<IUser & {_id:string}>(
     versionKey: false,
   }
 )
+
+userSchema.pre('save', async function(next) {
+  // Crea un id de ira
+  const uuid = new UuidGenerator().generate();
+
+  // Asigna el id de ira a los atributos _id e id
+  this._id = uuid;
+  this.id = uuid;
+
+  // Continúa con el proceso de guardado
+  next();
+});
 
 const UserModel = model<IUser>('User', userSchema)
 export default UserModel
