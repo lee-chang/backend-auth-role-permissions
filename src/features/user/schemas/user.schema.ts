@@ -6,7 +6,7 @@ import { phoneSchema } from '@/features/shared/schemas/phone.schema'
 
 // Hacer uso de la interfaz IUser
 
-const authoritySchema = z.array((z.string()))
+const roleSchema = z.array((z.string()))
 const passwordSchema = z.string().min(3).max(255)
 
 
@@ -19,13 +19,13 @@ const userSchema = z.object({
   login_code: z.string().min(3).max(255).optional(),
   phone: z.array(phoneSchema).optional(),
   address: z.array(addressSchema).optional(),
-  authority: authoritySchema.optional(), 
+  role: roleSchema.optional(), 
 })
 
 
 export const UserSchema = {
   Create: userSchema,
-  Update: userSchema.omit({ password: true, authority: true }).partial(),
-  UpdateAuthority: userSchema.pick({ authority: true }),
+  Update: userSchema.omit({ password: true, role: true }).partial(),
+  Updaterole: userSchema.pick({ role: true }),
   UpdatePassword: userSchema.pick({ password: true }),
 }

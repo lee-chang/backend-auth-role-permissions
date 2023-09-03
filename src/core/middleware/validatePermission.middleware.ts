@@ -8,7 +8,7 @@ import { RolePermissionService } from '@/features/role/services/role-permission.
 
 /**
  *
- * @param authority Array de roles que pueden acceder a la ruta
+ * @param role Array de roles que pueden acceder a la ruta
  * @returns
  */
 
@@ -18,11 +18,11 @@ const validatePermission = (permission: Permission) => {
       
       // ** 1. Obtener el rol del usuario
 
-      // req.user ->  Payload { id: string, authority: string[] }  path: @\interfaces\jwt.payload
+      // req.user ->  Payload { id: string, role: string[] }  path: @\interfaces\jwt.payload
 
-      if (!req.user?.authority || req.user?.authority.length === 0) throw new ErrorExt('ROL_NOT_EXIT', HttpStatus.UNAUTHORIZED)
+      if (!req.user?.role || req.user?.role.length === 0) throw new ErrorExt('ROL_NOT_EXIT', HttpStatus.UNAUTHORIZED)
       
-      const arrRoleId: string[] = req.user?.authority
+      const arrRoleId: string[] = req.user?.role
 
       // console.log('ROL BY USER', arrRoleId)
 

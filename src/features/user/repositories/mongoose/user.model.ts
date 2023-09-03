@@ -31,7 +31,7 @@ const userSchema: Schema = new Schema<IUser & {_id:string}>(
       type: String,
       require: true,
     },
-    authority: [
+    role: [
       {
         type: String,
         ref: 'Role',

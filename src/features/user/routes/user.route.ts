@@ -30,7 +30,7 @@ router.patch(
 router.patch(
   '/:id/roles',
   authRequired,
-  validatorShema(UserSchema.UpdateAuthority),
+  validatorShema(UserSchema.Updaterole),
   UserRoleController.updateUserRoles
 )
 

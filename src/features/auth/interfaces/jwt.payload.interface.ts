@@ -1,6 +1,6 @@
 export interface Payload {
     id: string
-    authority: string[]
+    role: string[]
     rememberMe?: Boolean
 }
 

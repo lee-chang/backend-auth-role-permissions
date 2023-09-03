@@ -9,12 +9,12 @@ export class UserRoleController {
     next: NextFunction
   ) {
     const { id } = req.params
-    const { authority }: { authority: [string] } = req.body // -> authority: [idRole1, idRole2, ...]
+    const { role }: { role: [string] } = req.body // -> role: [idRole1, idRole2, ...]
 
     try {
       const userUpdated = await UserRoleService.updateUserRolesById(
         id,
-        authority
+        role
       )
       return res.status(HttpStatus.OK).send(userUpdated)
     } catch (err) {

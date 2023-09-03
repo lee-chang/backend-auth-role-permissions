@@ -12,7 +12,7 @@ export class AuthUtil {
       const expiresIn = payload.rememberMe ? "30d" : "6d";
   
       jwt.sign(
-        { id: payload.id, authority: payload.authority },
+        { id: payload.id, role: payload.role },
         ENV_CONFIG.JWT_SECRET,
         { expiresIn: expiresIn },
         (err, token) => {

@@ -6,7 +6,7 @@ export interface IUser extends IAuth {
   id: string
   userName: string
   fullName: string
-  authority: [string]
+  role: [string]
   verified: boolean
   login_code: string
   phone: [IPhone]

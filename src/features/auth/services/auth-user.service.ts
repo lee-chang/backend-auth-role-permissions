@@ -23,7 +23,7 @@ export class AuthUserService {
 
     const payload: Payload = {
       id: newUser.id,
-      authority: newUser.authority,
+      role: newUser.role,
     }
     const token = await AuthUtil.generateToken(payload)
     if (!token) throw new ErrorExt('TOKEN_NOT_GENERATED')
@@ -44,7 +44,7 @@ export class AuthUserService {
 
     const payload: Payload = {
       id: userFount.id,
-      authority: userFount.authority,
+      role: userFount.role,
       rememberMe: isRememberMe,
     }
 

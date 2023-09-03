@@ -18,7 +18,7 @@ export class UserRoleService {
     const findUser = await userRepository.findUserById(id)
     const user = notUndefinedOrNull(findUser)
 
-    const { authority: oldRoles } = user
+    const { role: oldRoles } = user
 
 
     // Validar si los roles existen
@@ -64,7 +64,7 @@ export class UserRoleService {
     console.log('isNewRole', someNewRoles)
     console.log('isDeleteRole', someRemovedRoles)
 
-    user.authority = newRoleList
+    user.role = newRoleList
 
     const updatedUser = await userRepository.updateUserById(id, user)
     return notUndefinedOrNull(updatedUser)
